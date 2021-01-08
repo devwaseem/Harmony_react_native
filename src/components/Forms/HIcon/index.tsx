@@ -26,7 +26,7 @@ export interface HIconProps {
   type: HIconStyle
   state: HIconState
   onPress?: ()=>void
-  title: string
+  title?: string
   accessibilityLabel?: string
 }
 
@@ -62,7 +62,7 @@ const HarmonyIcon = (props: HIconProps)=> {
             );
         }
         else if (HIconState.loading===props.state)
-        {
+        {   
             return(
                 <View>
                     <TouchableOpacity style={HarmonyIconStyle.primarystates}
@@ -76,10 +76,11 @@ const HarmonyIcon = (props: HIconProps)=> {
             );  
         }
         else
-        {
+        {    var buttonstyle=null;
+            buttonstyle = {...HarmonyIconStyle.primarydisabled , ...HarmonyIconStyle.disabled}
             return(
                 <TouchableOpacity 
-                style={HarmonyIconStyle.primarydisabled}
+                style={buttonstyle}
                 disabled
                 type={props.type}
                 state={props.state} 

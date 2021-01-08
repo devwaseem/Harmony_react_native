@@ -18,7 +18,7 @@ const HomeScreen= () => {
             />   
             <HarmonyIcon
               type={HIconStyle.primary}
-              state={HIconState.active}
+              state={HIconState.disabled}
               title="Icon"
               onPress={() => Alert.alert('icon pressed')}
             /> 

@@ -40,7 +40,6 @@ export const HarmonyIconStyle = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        opacity : 0.5
     },
    
     secstates:{
@@ -65,6 +64,9 @@ export const HarmonyIconStyle = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
+        opacity : 0.5
+    },
+    disabled:{
         opacity : 0.5
     },
 })
