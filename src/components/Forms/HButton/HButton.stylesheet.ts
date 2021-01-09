@@ -160,8 +160,7 @@ export const HarmonyButtonStyle = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        letterSpacing: 0.75,
-
+        letterSpacing: 0.75
     },
     subinitial:{
         borderRadius: 10,
