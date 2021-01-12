@@ -106,7 +106,6 @@ export const HarmonyButtonStyle = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         letterSpacing: 0.75,
-
     },
     secActive:{
         borderRadius: 10,
