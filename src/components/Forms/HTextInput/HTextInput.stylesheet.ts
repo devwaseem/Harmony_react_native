@@ -1,11 +1,15 @@
-import { Right } from 'native-base';
+import styled, { css } from 'styled-components/native';
 import { StyleSheet } from 'react-native';
-
+interface PlaceholderLabelProps {
+    isFocused: boolean;
+    isFilled: boolean;
+   }
 export const HarmonyTextInputStyle = StyleSheet.create({
     //TODO: ADD STYLES HERE
     container:{
         width: '100%', 
-        alignItems : 'center'
+        alignItems : 'center',
+        marginTop : 100
     },
     input:{
         flexDirection:'row',
@@ -28,6 +32,9 @@ export const HarmonyTextInputStyle = StyleSheet.create({
         backgroundColor: "#E8E8E8",
         opacity: 0.5
     },
+    inputtyping:{
+        backgroundColor: "#E8E8E8",
+    },
     lefthalf:{
         flexDirection : 'row',
         alignItems : 'center',
@@ -43,11 +50,27 @@ export const HarmonyTextInputStyle = StyleSheet.create({
         display : 'flex',
         alignItems : 'center',
         letterSpacing: 0.75,
-        width : 230
-    }
-
-
-     
+        width : 230,
+        margin : 0
+    },
+    
 })
+
+export const PlaceholderLabel = styled.Text<PlaceholderLabelProps>`
+ position: absolute;
+ left: 5;
+ color: black;
+ top : 0;
+ 
+ ${(props) =>
+  props.isFocused || props.isFilled 
+   ? css`
+    transform: translateY(-10px);
+    font-size: 15px;
+   ` : css`
+    transform: translateY(+10px);
+    font-size: 16px;
+ `}
+`;
 
 

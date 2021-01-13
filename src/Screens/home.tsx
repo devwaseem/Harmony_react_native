@@ -24,10 +24,12 @@ const HomeScreen= () => {
               onPress={() => Alert.alert('icon pressed')}
             /> 
             <HTextInput
-              type={HTextInputStyle.standard}
-              state={HTextInputState.caption}
+              type={HTextInputStyle.searchIcon}
+              state={HTextInputState.active}
               placeholder="search"
               caption= "caption here!"
+              filled="999-999-999"
+              success
             />
           </View>
         </SafeAreaView>
