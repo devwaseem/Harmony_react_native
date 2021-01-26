@@ -16,7 +16,7 @@ export const HarmonyTextInputStyle = StyleSheet.create({
         alignItems : 'center',
         justifyContent : 'space-between',
         borderRadius: 16,
-        height:64,
+        
         width:325,  
         paddingHorizontal: 15 
     },
@@ -74,7 +74,7 @@ export const HarmonyTextInputStyle = StyleSheet.create({
 
 export const PlaceholderLabel = styled.Text<PlaceholderLabelProps>`
  position: absolute;
- 
+ left: 5;
  color: black;
  top : 0;
  

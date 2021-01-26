@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import HarmonyButton,{HButtonProps,HButtonStyle,HButtonState} from '../components/Forms/HButton';
 import HarmonyIcon,{HIconProps,HIconStyle,HIconState} from '../components/Forms/HIcon';
 import HTextInput,{HTextInputProps,HTextInputStyle,HTextInputState} from '../components/Forms/HTextInput';
+import HTextInputArea,{HTextInputAreaProps,HTextInputAreaState} from '../components/Forms/HTextInputArea';
+import HCheckbox from '../components/Forms/Checkbox';
+import HStepper from '../components/Forms/IncrementStepper'
+
 import { SafeAreaView, StatusBar, View, Alert } from 'react-native';
 
 const HomeScreen= () => {
@@ -9,7 +13,8 @@ const HomeScreen= () => {
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <View>
+        <View>
+          
             <HarmonyButton 
               type={HButtonStyle.secondary}
               state={HButtonState.disabled}
@@ -25,12 +30,26 @@ const HomeScreen= () => {
             /> 
             <HTextInput
               type={HTextInputStyle.searchIcon}
-              state={HTextInputState.active}
+              state={HTextInputState.filled}
               placeholder="search"
-              caption= "caption here!"
+              caption= "Success message"
               filled="999-999-999"
-              success
+              
             />
+           
+            <HTextInputArea
+              state={HTextInputAreaState.filled}
+              placeholder="search"
+              caption= "Success message"
+              filled="999-999-999"
+            />
+
+            <HCheckbox/>
+          
+            <HStepper
+            //disabled
+            />
+            
           </View>
         </SafeAreaView>
       </>
