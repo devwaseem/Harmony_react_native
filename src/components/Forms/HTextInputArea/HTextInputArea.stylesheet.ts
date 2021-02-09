@@ -16,7 +16,7 @@ export const HarmonyTextInputStyle = StyleSheet.create({
         alignItems : 'center',
         justifyContent : 'space-between',
         borderRadius: 16,
-        height:64,
+        
         width:325,  
         paddingHorizontal: 15 
     },
@@ -34,6 +34,22 @@ export const HarmonyTextInputStyle = StyleSheet.create({
     },
     inputtyping:{
         backgroundColor: "#E8E8E8",
+    },
+    inputSuccess:{
+        backgroundColor: "#DBF6E9",
+        borderWidth : 2,
+        borderColor : '#9DDFD3'
+    },
+    inputError:{
+        backgroundColor: "#FFF3F8",
+        borderWidth : 2,
+        borderColor : '#D93535'
+    },
+    success:{
+        color:'#839B97'
+    },
+    error:{
+        color:'#D93535'
     },
     lefthalf:{
         flexDirection : 'row',
@@ -58,7 +74,7 @@ export const HarmonyTextInputStyle = StyleSheet.create({
 
 export const PlaceholderLabel = styled.Text<PlaceholderLabelProps>`
  position: absolute;
- left: 5px;
+ left: 5;
  color: black;
  top : 0;
  
@@ -69,7 +85,7 @@ export const PlaceholderLabel = styled.Text<PlaceholderLabelProps>`
     font-size: 15px;
    ` : css`
     transform: translateY(+10px);
-    font-size: 18px;
+    font-size: 16px;
  `}
 `;
 

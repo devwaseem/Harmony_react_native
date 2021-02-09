@@ -16,7 +16,7 @@ interface InputProps {
   value: string;
  }
  
- export enum HTextInputStyle {
+export enum HTextInputStyle {
     standard,
     searchIcon    
 }
@@ -30,7 +30,6 @@ export enum HTextInputState {
     typing,
     filled
 }
-
 export interface HTextInputProps {
     type: HTextInputStyle
     state: HTextInputState
@@ -40,46 +39,79 @@ export interface HTextInputProps {
     filled?:string
     success:boolean
 }
-function onfocusfn() {
-  {HTextInputState.typing}
-}
+
 const HTextInput = (props: HTextInputProps)=> {
     const textFunction = () => {
-        const [value, onChangeText] = React.useState('');
-        if (props.state === HTextInputState.initial || props.state === HTextInputState.caption)
-        {
-        return (
-            <View>
-              <View style={{...HarmonyTextInputStyle.input,...HarmonyTextInputStyle.inputinitial}}>
-                <View style={HarmonyTextInputStyle.lefthalf}>
-                  { props.type === HTextInputStyle.searchIcon ?(  
-                    <MaterialIcons name='search' size={30} color = '#14142B' style = {HarmonyTextInputStyle.icon}/>
-                  ):(
-                    <View></View>
-                  )}
+        // const [value, onChangeText] = React.useState('');
+            const [isFocused, setIsFocused] = useState(false);
+            const [isFilled, setIsFilled] = useState(false);
+            const inputRef = useRef<InputReference>(null);
+            const handleInputFocus = useCallback(() => {
+            setIsFocused(true);
+            }, []);
+            const handleInputBlur = useCallback(() => {
+            setIsFocused(false);
+            if (inputRef.current) setIsFilled(!!inputRef.current.value);
+            }, []);
+            const handleChangeText = useCallback((text) => {
+            if (inputRef.current) inputRef.current.value = text;
+            },[]);
 
-                  <TextInput
-                    placeholder={props.placeholder}
-                    placeholderTextColor="#A0A3BD"
-                    autoCapitalize="sentences"
-                    onChangeText={text => onChangeText(text)}
-                    value={value}
-                    style = {HarmonyTextInputStyle.text}
-                    onFocus = {onfocusfn}
-                  />
+        if (props.state === HTextInputState.initial || props.state === HTextInputState.caption)
+          {
+          return (
+              <View>
+                <View style={isFocused === true ? {...HarmonyTextInputStyle.input , ...HarmonyTextInputStyle.inputactive} : {...HarmonyTextInputStyle.input , ...HarmonyTextInputStyle.inputinitial}}>
+                  <View style={HarmonyTextInputStyle.lefthalf}>
+                    { props.type === HTextInputStyle.searchIcon ?(  
+                      <MaterialIcons name='search' size={30} color = '#14142B' style = {HarmonyTextInputStyle.icon}/>
+                    ):(
+                      <View></View>
+                    )}
+                          <View>
+                            <PlaceholderLabel
+                            isFocused={isFocused}
+                            isFilled={isFilled}
+                            placeholderTextColor="#A0A3BD"
+                            onPress={() => setIsFocused(!isFocused)}
+                            >
+                              {props.placeholder}
+                            </PlaceholderLabel>
+
+                            <TextInput
+                            placeholderTextColor="#A0A3BD"
+                            autoCapitalize="sentences"
+                            ref={inputRef}
+                            onFocus={handleInputFocus}
+                            onBlur={handleInputBlur}
+                            onChangeText={handleChangeText}
+                            style = {HarmonyTextInputStyle.text}
+                            />
+                          </View>
+
+                    {/* initial's code
+                    <TextInput
+                      placeholder={props.placeholder}
+                      placeholderTextColor="#A0A3BD"
+                      autoCapitalize="sentences"
+                      onChangeText={text => onChangeText(text)}
+                      // value={value}
+                      style = {HarmonyTextInputStyle.text}
+                      onFocus= {onfocusfn}
+                    /> */}
+
+                  </View>
                 </View>
+                {props.state === HTextInputState.caption ?(
+                  <Text>
+                    {props.caption}
+                  </Text>
+                ):(
+                  <View></View>
+                )} 
               </View>
-              {props.state === HTextInputState.caption ?(
-                <Text>
-                  {props.caption}
-                </Text>
-              ):(
-                <View></View>
-              )} 
-            </View>
-        );
-        
-        }
+          );
+         }
         // ----------- active ------------
         
         else if (props.state === HTextInputState.active)
@@ -97,10 +129,9 @@ const HTextInput = (props: HTextInputProps)=> {
                   placeholder={props.placeholder}
                   placeholderTextColor="#A0A3BD"
                   autoCapitalize="sentences"
-                  onChangeText={text => onChangeText(text)}
-                  value={value}
+                  // onChangeText={text => onChangeText(text)}
+                  // value={value}
                   style = {HarmonyTextInputStyle.text}
-                  onFocus = {onfocusfn}
                 />
               </View>
 
@@ -110,7 +141,8 @@ const HTextInput = (props: HTextInputProps)=> {
             </View>
         );
         }
-        
+      
+      
         // -------------- disabled --------------
         else if (props.state === HTextInputState.disabled)
         {
@@ -127,69 +159,14 @@ const HTextInput = (props: HTextInputProps)=> {
                   placeholder={props.placeholder}
                   placeholderTextColor="#A0A3BD"
                   autoCapitalize="sentences"
-                  onChangeText={text => onChangeText(text)}
-                  value={value}
+                  // value={value}
                   style = {HarmonyTextInputStyle.text}
-                  // onFocus = {style}
                   editable = {false}
                 />
               </View>
             </View>
         );
         }
-
-        // -------------- typing --------------
-
-        else if (props.state === HTextInputState.typing)
-        {
-        
-          const [isFocused, setIsFocused] = useState(false);
-          const [isFilled, setIsFilled] = useState(false);
-          const inputRef = useRef<InputReference>(null);
-          const handleInputFocus = useCallback(() => {
-           setIsFocused(true);
-          }, []);
-          const handleInputBlur = useCallback(() => {
-           setIsFocused(false);
-           if (inputRef.current) setIsFilled(!!inputRef.current.value);
-          }, []);
-          const handleChangeText = useCallback((text) => {
-           if (inputRef.current) inputRef.current.value = text;
-          },[]);
-          return (
-            <View style={{...HarmonyTextInputStyle.input, ...HarmonyTextInputStyle.inputtyping}}>
-              <View style={HarmonyTextInputStyle.lefthalf}>
-                { props.type === HTextInputStyle.searchIcon ?(  
-                  <MaterialIcons name='search' size={30} color = '#14142B' style = {HarmonyTextInputStyle.icon}/>
-                ):(
-                  <View></View>
-                )}
-              <View>
-                <PlaceholderLabel
-                isFocused={isFocused}
-                isFilled={isFilled}
-                placeholderTextColor="#A0A3BD"
-                onPress={() => setIsFocused(!isFocused)}
-                >
-                  {props.placeholder}
-                </PlaceholderLabel>
-
-                <TextInput
-                ref={inputRef}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onChangeText={handleChangeText}
-                style = {HarmonyTextInputStyle.text}
-                />
-              </View>
-              </View>
-              <TouchableOpacity  style = {HarmonyTextInputStyle.icon}>
-                <MaterialIcons name='close' size={30} color = '#A0A3BD' /> 
-              </TouchableOpacity>
-            </View>
-          );
-         }
-
          // -------------- filled --------------
 
         else if (props.state === HTextInputState.filled)
@@ -223,8 +200,57 @@ const HTextInput = (props: HTextInputProps)=> {
             </View>
           );
          }
-      
-      }
+        
+      else 
+      {
+        // -------------- typing --------------
+          const [isFocused, setIsFocused] = useState(false);
+          const [isFilled, setIsFilled] = useState(false);
+          const inputRef = useRef<InputReference>(null);
+          const handleInputFocus = useCallback(() => {
+          setIsFocused(true);
+          }, []);
+          const handleInputBlur = useCallback(() => {
+          setIsFocused(false);
+          if (inputRef.current) setIsFilled(!!inputRef.current.value);
+          }, []);
+          const handleChangeText = useCallback((text) => {
+          if (inputRef.current) inputRef.current.value = text;
+          },[]);
+          return (
+            <View style={{...HarmonyTextInputStyle.input, ...HarmonyTextInputStyle.inputtyping}}>
+              <View style={HarmonyTextInputStyle.lefthalf}>
+                { props.type === HTextInputStyle.searchIcon ?(  
+                  <MaterialIcons name='search' size={30} color = '#14142B' style = {HarmonyTextInputStyle.icon}/>
+                ):(
+                  <View></View>
+                )}
+              <View>
+                <PlaceholderLabel
+                isFocused={isFocused}
+                isFilled={isFilled}
+                placeholderTextColor="#A0A3BD"
+                onPress={() => setIsFocused(!isFocused)}
+                >
+                  {props.placeholder}
+                </PlaceholderLabel>
+
+                <TextInput
+                ref={inputRef}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                onChangeText={handleChangeText}
+                style = {HarmonyTextInputStyle.text}
+                />
+              </View>
+              </View>
+              <TouchableOpacity  style = {HarmonyTextInputStyle.icon}>
+                <MaterialIcons name='close' size={30} color = '#A0A3BD' /> 
+              </TouchableOpacity>
+            </View>
+          );
+        }
+  }
    
   return (
     <View style={HarmonyTextInputStyle.container}>
