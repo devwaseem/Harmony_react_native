@@ -5,7 +5,8 @@ import Payment from "../components/Forms/Cards/Payment";
 import Card from "../components/Forms/Cards/Card";
 import Card1 from "../components/Forms/Cards/Card1";
 import Cardmain from "../components/Forms/Cards/Cardmain";
-
+import Card3 from "../components/Forms/Cards/Card3";
+import Card4 from "../components/Forms/Cards/Card4";
 import { SafeAreaView, ScrollView, } from "react-native";
 
 
@@ -111,6 +112,28 @@ render(){
             image={require("../../assets/Paypal.jpg")}
           />
           </Align>
+
+
+{/* welcome to Lagoom cards */}
+
+          <Card3
+            image={require("../../assets/Close.jpg")}
+            title="Welcome to Laagom"
+            caption="See all the new feature we added through our tutorial"
+            
+            text="See Tutorial"
+            text1="skip for now"
+          />
+
+
+          <Card4
+            image={require("../../assets/Dash.png")}
+            title="Welcome to Laagom"
+            caption="See all the new feature we added through our tutorial"
+            
+            text="See Tutorial"
+            text1="skip for now"
+          />      
         </ScrollView>
       </SafeAreaView>
     </Container>
