@@ -8,7 +8,7 @@ import Cardmain from "../components/Forms/Cards/Cardmain";
 import Card3 from "../components/Forms/Cards/Card3";
 import Card4 from "../components/Forms/Cards/Card4";
 import { SafeAreaView, ScrollView, } from "react-native";
-
+import Avatar from "../components/Forms/Cards/Avatar";
 
 export default class HomeScreen extends React.Component {
 
@@ -133,7 +133,43 @@ render(){
             
             text="See Tutorial"
             text1="skip for now"
-          />      
+          /> 
+
+
+          
+
+{/* avatar display */}
+
+
+            <Avatar
+            
+              image={require("../../assets/People.png")}
+              
+              title="First name and Last name" 
+              
+            />
+              <Avatar
+            
+            image={require("../../assets/People.png")}
+            
+            lname="First Name " 
+            
+          />
+          <Avatar
+            
+            image={require("../../assets/People.png")}
+            title="First Name and last Name " 
+            online="Online"
+            
+          />
+          <Avatar
+            
+            image={require("../../assets/People.png")}
+            
+            
+          />
+
+
         </ScrollView>
       </SafeAreaView>
     </Container>
